@@ -1,0 +1,11 @@
+This project is a C++ port of the original Go project:
+
+  u64-remote
+  https://github.com/AllMeatball/u64-remote
+
+Original Author: AllMeatball
+Original License: MIT
+
+This repository contains a Linux-focused C++ port with additional features
+(e.g., network discovery). All original design credit belongs to the upstream
+author.
