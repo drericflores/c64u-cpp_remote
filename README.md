@@ -71,3 +71,14 @@ Notes:
 - The API password goes into `X-Password` header.
 
 >>>>>>> c51b04d (Initial import: u64-remote C++ port (Linux + libcurl + discovery))
+
+## Attribution
+
+This project is a C++ port of the original Go implementation:
+
+- **Original project:** https://github.com/AllMeatball/u64-remote
+- **Original author:** AllMeatball
+- **License:** MIT
+
+All original architectural credit belongs to the upstream author.
+
