@@ -1,33 +1,30 @@
 #pragma once
+#include "discovery.h"
 #include <cstdint>
 #include <string>
 #include <vector>
 
 namespace util {
 
-// Read entire file as bytes
+// Read file bytes (for PRG)
 std::vector<uint8_t> readFileBytes(const std::string& path);
 
-// Simple, minimal JSON reader for creds.json (no external deps)
+// Credentials
 struct Creds {
-    std::string address;   // e.g. http://10.0.0.183
-    std::string password;  // API password
-    bool enableMessageBox = false; // kept for parity (Linux: no-op)
+    std::string address;
+    std::string password;
+    bool enableMessageBox = false;
 };
 
 Creds loadCreds(const std::string& path);
 
-// Networking helpers for discovery
-struct FoundDevice {
-    std::string address; // http://x.x.x.x
-    std::string versionResponse; // raw body from /v1/version
-};
+// Fallback scanning (original subnet scan)
+std::vector<DiscoveredService> discoverU64(int timeoutMs, int maxHostsPerIface);
+int promptPickIndex(const std::vector<DiscoveredService>& devs);
 
-// Discover C64U devices on local subnets by probing /v1/version.
-// maxHostsPerIface caps scanning; timeoutMs is per-host probe.
-std::vector<FoundDevice> discoverU64(int timeoutMs = 250, int maxHostsPerIface = 512);
-
-// Ask user to pick one device if more than one is found.
-int promptPickIndex(const std::vector<FoundDevice>& devs);
+// Cache
+void writeCache(const std::string& path, const std::string& address, const std::string& hostname);
+bool readCache(const std::string& path, std::string& address, std::string& hostname);
+bool validateDevice(const std::string& address);
 
 } // namespace util
